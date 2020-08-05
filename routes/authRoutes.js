@@ -11,4 +11,15 @@ module.exports = (app) => {
 
     // when the user gets sent back to the callback url
     app.get('/auth/google/callback', passport.authenticate('google'));
-}
+
+    // user logout
+    // req.logout() - a function automatically attached to request object by passport, takes a cookie and kills it
+    app.get('/api/logout', (req, res) => {
+        req.logout();
+        res.send(req.user);
+    });
+
+    app.get('/api/current_user', (req, res) => {
+        res.send(req.user);
+    });
+};
