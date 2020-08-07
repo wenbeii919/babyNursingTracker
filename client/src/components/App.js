@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Header from './Header';
+import Landing from './Landing';
+
 const nursings = () => <h2>dashboard</h2>
 const nursingNew = () => <h2>adding a new nursing item</h2>
-const landing = () => <h2>landing</h2>
 
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
                 <BrowserRouter>
                     <div>
                         <Header />
-                        <Route exact path="/" component={landing} />
+                        <Route exact path="/" component={Landing} />
                         <Route exact path="/nursings" component={nursings} />
                         <Route path="/nursings/new" component={nursingNew} />
                     </div>

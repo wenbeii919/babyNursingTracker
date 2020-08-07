@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 class Header extends Component {
     renderContent() {
         switch (this.props.auth) {
@@ -14,11 +16,14 @@ class Header extends Component {
     render() {
         console.log(this.props);
         return (
-            <nav>
+            <nav className="light-green lighten-3">
                 <div className="nav-wrapper">
-                    <a className="left brand-logo">
+                    <Link 
+                        to={this.props.auth ? '/nursings' : '/'}
+                        className="left brand-logo"
+                    >
                         MamaDada
-                    </a>
+                    </Link>
                     <ul className="right">
                         {this.renderContent()}
                     </ul>
