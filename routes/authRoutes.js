@@ -22,7 +22,7 @@ module.exports = (app) => {
     // req.logout() - a function automatically attached to request object by passport, takes a cookie and kills it
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send(req.user);
+        res.redirect('/');
     });
 
     app.get('/api/current_user', (req, res) => {
