@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
 require('./models/User');
 require('./services/passport');
+
 
 // db connects
 mongoose
@@ -13,6 +15,8 @@ mongoose
     .catch(err => console.log(err));
 
 const app = express();
+
+app.use(cors());
 
 app.use(
     cookieSession({
