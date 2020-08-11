@@ -19,7 +19,7 @@ class Header extends Component {
             <nav className="light-green lighten-3">
                 <div className="nav-wrapper">
                     <Link 
-                        to={this.props.auth ? '/nursings' : '/'}
+                        to={this.props.auth ? '/dashboard' : '/'}
                         className="left brand-logo"
                     >
                         MamaDada

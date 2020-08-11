@@ -6,7 +6,11 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./services/passport');
 
-mongoose.connect(keys.mongoURI);
+// db connects
+mongoose
+    .connect(keys.mongoURI, { useNewUrlParser: true })
+    .then(() => console.log("Connected To MongoDB via Mongoose"))
+    .catch(err => console.log(err));
 
 const app = express();
 
@@ -21,6 +25,15 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 
+const sleepRoutes = require("./routes/sleepRoutes");
+app.use("/api/sleep/", sleepRoutes);
+
+const foodRoutes = require("./routes/foodRoutes");
+app.use("/api/food/", foodRoutes);
+
+const diaperRoutes = require("./routes/diaperRoutes");
+app.use("/api/diaper/", diaperRoutes);
+
 if (process.env.NODE_ENV === 'production') {
     // express will serve up production assets, ex. main.js or main.css file
     app.use(express.static('client/build'));
@@ -32,4 +45,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+app.listen(PORT, err => {
+    if (err) throw err;
+    console.log(`listening on ${PORT}`);
+  });
