@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addSleep } from "../../actions/nursingLogActions";
+import { addFood } from "../../actions/nursingLogActions";
 
-class AddSleepModal extends Component {
+class AddFoodModal extends Component {
     state = {
         date: "",
         createdAt: "",
-        updatedAt: ""
+        amount: ""
     };
 
     handleChange = e => {
@@ -20,15 +20,15 @@ class AddSleepModal extends Component {
         let nursing = {};
         nursing.date = this.state.date ? this.state.date : undefined;
         nursing.createdAt = this.state.createdAt ? this.state.createdAt : undefined;
-        nursing.updatedAt = this.state.updatedAt ? this.state.updatedAt : undefined;
-        this.props.addSleep(nursing);
+        nursing.amount = this.state.amount;
+        this.props.addFood(nursing);
     };
 
     render() {
         return (
             <div
                 className="modal fade"
-                id="add-sleep"
+                id="add-food"
                 tabIndex="-1"
                 role="dialog"
                 aria-labelledby="smallmodalLabel"
@@ -38,7 +38,7 @@ class AddSleepModal extends Component {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="smallmodalLabel">
-                                Log a new sleep
+                                Log a new feeding
                             </h5>
                             <button
                                 type="button"
@@ -73,10 +73,10 @@ class AddSleepModal extends Component {
                                     </div>
                                     <div className="form-group">
                                         <input
-                                            type="date"
-                                            name="updatedAt"
+                                            type="number"
+                                            name="amount"
                                             className="form-control"
-                                            value={this.state.updatedAt}
+                                            value={this.state.amount}
                                             onChange={this.handleChange}
                                         />
                                     </div>
@@ -109,5 +109,5 @@ class AddSleepModal extends Component {
 
 export default connect(
     null,
-    { addSleep }
-)(AddSleepModal);
+    { addFood }
+)(AddFoodModal);

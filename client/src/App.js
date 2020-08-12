@@ -3,9 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 
-import Header from './components/Header';
-import Landing from './components/Landing';
-import Dashboard from './components/Dashboard';
+import Header from './components/layout/Header';
+import Landing from './components/layout/Landing';
+import Dashboard from './components/dashboard/DashboardMain';
 
 
 class App extends Component {

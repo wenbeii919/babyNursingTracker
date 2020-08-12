@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Filters from "./Filters";
+import SleepTable from "./SleepTable";
 
 export default class DashboardMain extends Component {
     static propTypes = {};
@@ -13,7 +15,7 @@ export default class DashboardMain extends Component {
                         </div>
                     </div>
                 </div>
-                
+                <Filters />
             </div>
         )
     }
