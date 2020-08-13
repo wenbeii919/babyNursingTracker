@@ -1,94 +1,87 @@
-import React from 'react';
-import URLSearchParams from 'url-search-params';
-import { withRouter } from 'react-router-dom';
-import {
-    ButtonToolbar, Button, FormGroup, FormControl, ControlLabel,
-    Row, Col,
-} from 'react-bootstrap';
+import React, { Component } from "react";
+import $ from "jquery";
+import "select2/dist/css/select2.min.css";
+import "select2/dist/js/select2.min";
+import AddSleepModal from "./AddSleepModal";
+import AddFoodModal from "./AddFoodModal";
+import AddDiaperModal from "./AddDiaperModal";
 
-class Filters extends React.Component {
-    constructor({ location: { search } }) {
-        super();
-        const params = new URLSearchParams(search);
-        this.state = {
-            type: params.get('type') || '',
-            changed: false,
-        };
+export default class Filters extends Component {
 
-        this.onChangeType = this.onChangeType.bind(this);
-        this.applyFilter = this.applyFilter.bind(this);
-        this.showOriginalFilter = this.showOriginalFilter.bind(this);
-    }
-
-    componentDidUpdate(prevProps) {
-        const { location: { search: prevSearch } } = prevProps;
-        const { location: { search } } = this.props;
-        if (prevSearch !== search) {
-          this.showOriginalFilter();
-        }
-    }
-
-    onChangeType(e) {
-        this.setState({ type: e.target.value, changed: true });
-    }
-
-    showOriginalFilter() {
-        const { location: { search } } = this.props;
-        const params = new URLSearchParams(search);
-        this.setState({
-          type: params.get('type') || '',
-          changed: false,
+  componentDidMount() {
+    // Slider 2
+    try {
+      $(".js-select2").each(function() {
+        $(this).select2({
+          minimumResultsForSearch: 20,
+          dropdownParent: $(this).next(".dropDownSelect2")
         });
+      });
+    } catch (error) {
+      console.log(error);
     }
-    applyFilter() {
-        const { type } = this.state;
-        const { history, urlBase } = this.props;
-        const params = new URLSearchParams();
-        if (type) params.set('type', type);
-    
-        const search = params.toString() ? `?${params.toString()}` : '';
-        history.push({ pathname: urlBase, search });
-    }
+  }
 
-    render() {
-        const { type, changed } = this.state;
-        return (
-            <Row>
-                <Col xs={6} sm={4} md={3} lg={2}>
-                    <FormGroup>
-                        <ControlLabel>Type:</ControlLabel>
-                        <FormControl
-                            componentClass="select"
-                            value={type}
-                            onChange={this.onChangeStatus}
-                        >
-                            <option value="">(All)</option>
-                            <option value="Sleep">Sleep</option>
-                            <option value="Food">Food</option>
-                            <option value="Diaper">Diaper</option>
-                        </FormControl>
-                    </FormGroup>
-                </Col>
-                <Col xs={6} sm={4} md={3} lg={2}>
-                    <FormGroup>
-                        <ControlLabel>&nbsp;</ControlLabel>
-                        <ButtonToolbar>
-                            <Button bsStyle="primary" type="button" onClick={this.applyFilter}>
-                                Apply
-                            </Button>
-                            <Button
-                                type="button"
-                                onClick={this.showOriginalFilter}
-                                disabled={!changed}
-                            >
-                                Reset
-                            </Button>
-                        </ButtonToolbar>
-                    </FormGroup>
-                </Col>
-          </Row>
-        );
-    }
+  render() {
+    return (
+      <div className="table-data__tool mt-5">
+        <div className="table-data__tool-left">
+          <div className="rs-select2--light rs-select2--md">
+            <select
+                className="js-select2"
+                name="types"
+                defaultValue="all-logs"
+            >
+                <option value="all-logs">All Logs</option>
+                <option value="sleep">Sleep Log</option>
+                <option value="food">Food Log</option>
+                <option value="diaper">Diaper Log</option>
+            </select>
+            <div className="dropDownSelect2" />
+          </div>
+          <div className="rs-select2--light rs-select2--sm">
+            <select className="js-select2" name="time" defaultValue="monthly">
+              <option value="monthly">Monthly</option>
+              <option value="weekly">Weekly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+            <div className="dropDownSelect2" />
+          </div>
+          <button className="au-btn-filter">
+            <i className="zmdi zmdi-filter-list" />
+            filters
+          </button>
+        </div>
+        <div className="table-data__tool-right">
+            <button
+                className="au-btn au-btn-icon au-btn--small"
+                data-toggle="modal"
+                data-target="#add-sleep"
+            >
+                <i className="zmdi zmdi-plus" />
+                add sleep
+            </button>
+            <button
+                className="au-btn au-btn-icon au-btn--small"
+                data-toggle="modal"
+                data-target="#add-food"
+            >
+                <i className="zmdi zmdi-plus" />
+                add food
+            </button>
+            <button
+                className="au-btn au-btn-icon au-btn--small"
+                data-toggle="modal"
+                data-target="#add-diaper"
+            >
+                <i className="zmdi zmdi-plus" />
+                add diaper change
+            </button>
+        </div>
+        <AddSleepModal />
+        <AddFoodModal />
+        <AddDiaperModal />
+      </div>
+    );
+  }
 }
-
-export default withRouter(Filters);

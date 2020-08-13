@@ -6,7 +6,7 @@ const Landing = () => {
             <h1>
                 Mamadada!
             </h1>
-            help you know your baby better!
+            help you track your baby's sleep, formula intake, and diaper change!
         </div>
     );
 };
