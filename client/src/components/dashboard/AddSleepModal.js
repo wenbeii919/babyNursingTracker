@@ -1,113 +1,44 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addSleep } from "../../actions/nursingLogActions";
+// import React, { Component } from "react";
+// import "../jquery/materialize";
 
-class AddSleepModal extends Component {
-    state = {
-        date: "",
-        createdAt: "",
-        updatedAt: ""
-    };
+// class AddSleepModal extends Component {
+//     render() {
+//         return (
+//             <div id="addSleep" class="modal">
+//                 <div class="modal-content">
+//                     <h4>Baby's Sleeping!</h4>
+//                     <div class="row">
+//                         <form class="col s12">
+//                             <div class="row modal-form-row">
+//                                 <div class="input-field col s12">
+//                                     <input type="text" class="datepicker" />
+//                                     <label for="date_input">Date</label>
+//                                 </div>
+//                             </div>
+//                             <div class="row">
+//                                 <div class="input-field col s12">
+//                                     <input type="text" class="timepicker" />
+//                                     <label for="created_at">Fall Asleep At</label>
+//                                 </div>
+//                             </div>       
+//                             <div class="row">
+//                                 <div class="input-field col s12">
+//                                     <input type="text" class="timepicker" />
+//                                     <label for="updated_at">Wake Up At</label>
+//                                 </div>
+//                             </div>             
+//                         </form>
+//                     </div>
+//                 </div>
+//                 <div class="modal-footer">
+//                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">ADD</a>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
-    handleChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    };
-
-    handleSubmit = e => {
-        e.preventDefault();
-        let nursing = {};
-        nursing.date = this.state.date ? this.state.date : undefined;
-        nursing.createdAt = this.state.createdAt ? this.state.createdAt : undefined;
-        nursing.updatedAt = this.state.updatedAt ? this.state.updatedAt : undefined;
-        this.props.addSleep(nursing);
-    };
-
-    render() {
-        return (
-            <div
-                className="modal fade"
-                id="add-sleep"
-                tabIndex="-1"
-                role="dialog"
-                aria-labelledby="smallmodalLabel"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="smallmodalLabel">
-                                Log a new sleep
-                            </h5>
-                            <button
-                                type="button"
-                                className="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="card-body card-block">
-                                <form>
-                                    <div className="form-group">
-                                        <input
-                                            type="date"
-                                            name="date"
-                                            className="form-control"
-                                            value={this.state.date}
-                                            onChange={this.handleChange}
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <input
-                                            type="date"
-                                            name="createdAt"
-                                            className="form-control"
-                                            value={this.state.createdAt}
-                                            onChange={this.handleChange}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <input
-                                            type="date"
-                                            name="updatedAt"
-                                            className="form-control"
-                                            value={this.state.updatedAt}
-                                            onChange={this.handleChange}
-                                        />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button
-                                type="button"
-                                className="btn btn-secondary"
-                                data-dismiss="modal"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                type="button"
-                                className="btn btn-primary"
-                                onClick={this.handleSubmit}
-                                data-dismiss="modal"
-                            >
-                                Confirm
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default connect(
-    null,
-    { addSleep }
-)(AddSleepModal);
+// export default connect(
+//     null,
+//     { addSleep }
+// )(AddSleepModal);
